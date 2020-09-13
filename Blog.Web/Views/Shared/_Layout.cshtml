@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-    <div>
-        <mai>
-            @RenderBody()
-        </mai>
-    </div>
+    <partial name="_MenuPartial.cshtml"/>
 
-    <footer>&copy; 2020 - Blog All Rights Reserved</footer>
+    <main class="main">
+        @RenderBody()
+    </main>
+
+    <partial name="_FooterPartial" />
+
     @if (ViewBag.RegisterJQuery == true)
     {
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
