@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <div>
@@ -14,7 +14,10 @@
     </div>
 
     <footer>&copy; 2020 - Blog All Rights Reserved</footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @if (ViewBag.RegisterJQuery == true)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    }
     @RenderSection("Scripts", required: false)
 </body>
 </html>
