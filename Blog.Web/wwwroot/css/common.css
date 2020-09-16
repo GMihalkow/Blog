@@ -1,3 +1,15 @@
 ﻿.text-center {
     text-align: center;
 }
+
+a.link-btn {
+    color: #555;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.d-inline-block {
+    display: inline-block;
+}

@@ -5,27 +5,29 @@
 
 .nav-wrapper {
     padding: 1rem 0;
-    height: 400px;
-    background-image: url('../img//bg.jpg');
-    background-size: auto;
-    background-repeat: no-repeat;
 }
 
-.nav > ul {
+.nav > ul:not(.hidden-nav) {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     list-style: none;
 }
 
-    .nav > ul > li > a {
-        font-size: 18px;
-        padding: 0.5rem 1.5rem;
-        text-transform: uppercase;
-        position: relative;
-        color: #222;
+    .nav > ul:not(.hidden-nav) > li {
+        margin: 1rem 0;
     }
 
-nav > ul > li > a:after {
+        .nav > ul:not(.hidden-nav) > li > a {
+            font-weight: bold;
+            font-size: 18px;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            position: relative;
+            color: #222;
+        }
+
+nav > ul:not(.hidden-nav) > li > a:after {
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
@@ -38,13 +40,13 @@ nav > ul > li > a:after {
     width: 0;
 }
 
-nav > ul > li > a:focus {
+nav > ul:not(.hidden-nav) > li > a:focus {
     background-color: #222;
     color: #fff;
     transition: background-color 0.3s ease-in;
 }
 
-nav > ul > li > a:hover:after {
+nav > ul:not(.hidden-nav) > li > a:hover:after {
     width: 100%;
     left: 0;
 }
