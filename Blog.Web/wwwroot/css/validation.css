@@ -1,0 +1,9 @@
+﻿.validation-message {
+    color: #f00;
+    display: block;
+    text-align: center;
+}
+
+.validation-message ul {
+    list-style: none;
+}
