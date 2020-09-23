@@ -45,7 +45,7 @@ namespace Blog.Web.Services.DataSeeder
                 Email = "tester@gbg.bg"
             };
 
-            var userExists = this._signInManager.UserManager.FindByNameAsync(user.UserName) != null;
+            var userExists = this._signInManager.UserManager.FindByNameAsync(user.UserName).GetAwaiter().GetResult() != null;
 
             if (!userExists)
             {
