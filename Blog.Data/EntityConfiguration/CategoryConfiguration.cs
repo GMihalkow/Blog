@@ -12,6 +12,10 @@ namespace Blog.Data.EntityConfiguration
                 .HasKey(c => c.Id);
 
             builder
+                .HasIndex(c => c.Name)
+                .IsUnique();
+
+            builder
                 .Property(c => c.Name)
                 .HasMaxLength(250)
                 .IsRequired();
