@@ -12,6 +12,10 @@ namespace Blog.Data.EntityConfiguration
                 .HasKey(c => c.Id);
 
             builder
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .HasIndex(c => c.Name)
                 .IsUnique();
 
@@ -24,6 +28,12 @@ namespace Blog.Data.EntityConfiguration
                 .HasMany(c => c.Articles)
                 .WithOne(a => a.Category)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder
+                .Property(c => c.CreatedOn)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .ValueGeneratedOnAdd()
+                .IsRequired();
         }
     }
 }

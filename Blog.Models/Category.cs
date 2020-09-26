@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Blog.Models
 {
@@ -11,5 +12,7 @@ namespace Blog.Models
         public string CreatorId { get; set; }
 
         public User Creator { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }
