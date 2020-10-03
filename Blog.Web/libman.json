@@ -44,6 +44,20 @@
       "files": [
         "jquery.validate.min.js"
       ]
+    },
+    {
+      "library": "tabulator@4.8.2",
+      "destination": "wwwroot/lib/tabulator/",
+      "files": [
+        "css/tabulator_midnight.min.css"
+      ]
+    },
+    {
+      "library": "moment.js@2.29.0",
+      "destination": "wwwroot/lib/moment.js/",
+      "files": [
+        "moment.min.js"
+      ]
     }
   ]
 }
