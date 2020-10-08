@@ -8,8 +8,12 @@ namespace Blog.Web.Infrastructure.Extensions
         public static IEnumerable<T> OptimizedSkip<T>(this IEnumerable<T> collection, int skipAmount)
         {
             var list = collection.ToList();
+            var startIndex = skipAmount - 1;
 
-            for (int i = skipAmount - 1; i < list.Count; i++)
+            if (startIndex < 0)
+                startIndex = 0;
+
+            for (int i = startIndex; i < list.Count; i++)
             {
                 yield return list[i];
             }
