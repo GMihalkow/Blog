@@ -1,0 +1,52 @@
+﻿.custom-table {
+    max-width: 60rem;
+    margin: 0 auto;
+    height: auto;
+}
+
+.custom-table-toolbar-input {
+    outline: none;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+
+.custom-table-actions-col > * {
+    margin-right: 0.5rem;
+}
+
+.custom-table-wrapper {
+    max-width: 60rem;
+    margin: 0 auto;
+    color: #fff;
+    background-color: #000;
+}
+
+.custom-table-toolbar {
+    display: flex;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.custom-table-btn {
+    outline: none;
+    border: none;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    background-color: #fff;
+    color: #000;
+    border-radius: 3px;
+}
+
+.custom-table-toolbar > * {
+    margin-right: 0.5rem;
+}
+
+.custom-table-wrapper > h2 {
+    font-size: 36px;
+    padding: 2rem 0;
+    border-bottom: 5px solid #000;
+}
+
+.custom-table-btn:hover {
+    cursor: pointer;
+}
