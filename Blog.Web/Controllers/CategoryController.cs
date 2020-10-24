@@ -1,6 +1,8 @@
 ﻿using Blog.Dal.Models.Category;
 using Blog.Dal.Services.Categories.Contracts;
 using Blog.Web.Infrastructure.Constants;
+using Blog.Web.Infrastructure.Extensions;
+using Blog.Web.Models.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -89,6 +91,7 @@ namespace Blog.Web.Controllers
                 return this.NotFound();
 
             await this._categoryService.Delete(id);
+            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, "Successfully deleted category."));
 
             return this.RedirectToAction(nameof(Search));
         }

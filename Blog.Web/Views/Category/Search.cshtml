@@ -1,10 +1,12 @@
 ﻿@{
     ViewBag.RegisterMomentJs = true;
     ViewBag.RegisterTabulator = true;
+    ViewBag.RegisterModals = true;
 }
 
 <div class="custom-table-wrapper">
     <h2 class="text-center">Categories</h2>
+    <partial name="_AlertPartial" model="@TempData.GetValue<Alert>(WebConstants.AlertKey)" />
     <div class="custom-table-toolbar">
         <input id="category-search-toolbar-input" class="custom-table-toolbar-input" type="text" placeholder="Search categories..." />
         <a id="category-submit-search-btn" href="javascript:void(0)" class="custom-table-btn">Submit</a>
@@ -79,10 +81,16 @@
 
                             var deleteBtn = document.createElement('a');
                             deleteBtn.textContent = 'Delete';
+
+                            deleteBtn.setAttribute('confirm-modal-btn', '');
+                            deleteBtn.setAttribute('confirm-modal-message', 'Are you sure that you want to delete this category?');
+
                             deleteBtn.classList.add('custom-table-btn');
                             deleteBtn.href = '@this.Url.Action("Delete")/' + cell.getData().id;
 
                             div.appendChild(deleteBtn);
+
+                            modalFunctions.bindConfirmModalBtns();
 
                             return div;
                         }
