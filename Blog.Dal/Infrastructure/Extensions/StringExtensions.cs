@@ -1,4 +1,4 @@
-﻿namespace Blog.Web.Infrastructure.Extensions
+﻿namespace Blog.Dal.Infrastructure.Extensions
 {
     public static class StringExtensions
     {
