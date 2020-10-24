@@ -1,11 +1,13 @@
-﻿using Blog.Web.Models.Category;
-using Blog.Web.Services.Categories.Contracts;
+﻿using Blog.Dal.Models.Category;
+using Blog.Dal.Services.Categories.Contracts;
+using Blog.Web.Infrastructure.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
 {
-    //[Authorize(Roles = RoleConstants.Administrator)]
+    [Authorize(Roles = RoleConstants.Administrator)]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
@@ -13,7 +15,7 @@ namespace Blog.Web.Controllers
         public CategoryController(ICategoryService categoryService)
             => this._categoryService = categoryService;
 
-        public async Task<IActionResult> Search()
+        public IActionResult Search()
             => this.View();
 
         public IActionResult Create() => this.View();
@@ -53,19 +55,40 @@ namespace Blog.Web.Controllers
 
             return this.View(categoryEditModel);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Edit(CategoryEditModel categoryEditModel)
         {
             if (!this.ModelState.IsValid)
                 return this.View(categoryEditModel);
 
-            var category = await this._categoryService.GetById(categoryEditModel.Id);
+            var categoryById = await this._categoryService.GetById(categoryEditModel.Id);
 
-            if (category == null || category.CreatorId != await this.GetLoggedUserId())
+            if (categoryById == null || categoryById.CreatorId != await this.GetLoggedUserId())
                 return this.NotFound();
 
+            var categoryByName = await this._categoryService.GetByName(categoryEditModel.Name);
+
+            if (categoryByName != null)
+            {
+                this.ModelState.AddModelError(string.Empty, "Category with this name already exists.");
+                
+                return this.View(categoryEditModel);
+            }
+
             await this._categoryService.Edit(categoryEditModel);
+
+            return this.RedirectToAction(nameof(Search));
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var category = await this._categoryService.GetById(id);
+
+            if (category == null)
+                return this.NotFound();
+
+            await this._categoryService.Delete(id);
 
             return this.RedirectToAction(nameof(Search));
         }

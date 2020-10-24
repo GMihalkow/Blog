@@ -2,8 +2,12 @@
 using Blog.Models;
 using Blog.Web.Services.Accounts;
 using Blog.Web.Services.Accounts.Contracts;
+using Blog.Dal.Services.Categories;
+using Blog.Dal.Services.Categories.Contracts;
 using Blog.Web.Services.DataSeeder;
 using Blog.Web.Services.DataSeeder.Contracts;
+using Blog.Dal.Services.Users;
+using Blog.Web.Services.Users.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,11 +19,13 @@ namespace Blog.Web.Infrastructure.Extensions
     {
         public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
             => serviceCollection
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<ICategoryService, CategoryService>()
                 .AddTransient<IAccountService, AccountService>()
                 .AddTransient<IDataSeeder, DataSeeder>();
 
-        public static IServiceCollection AddDb(this IServiceCollection serviceCollection, IConfiguration configuration) =>
-            serviceCollection
+        public static IServiceCollection AddDb(this IServiceCollection serviceCollection, IConfiguration configuration) 
+            => serviceCollection
                 .AddDbContext<BlogDbContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 

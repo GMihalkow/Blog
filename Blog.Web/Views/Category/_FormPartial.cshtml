@@ -1,0 +1,24 @@
+﻿@model CategoryInputModel
+@using Blog.Dal.Models.Category;
+@{
+    var isEdit = Model is CategoryEditModel;
+}
+
+<div class="form-wrapper">
+    <form class="form" asp-action="@(isEdit ? "Edit" : "Create")" method="@FormMethod.Post">
+        <h2 class="form-h2">@(isEdit ? "Edit" : "Create") Category</h2>
+        <div class="validation-message" asp-validation-summary="ModelOnly"></div>
+        @if (isEdit)
+        {
+            @Html.HiddenFor(m => ((CategoryEditModel)m).Id)
+        }
+        <div>
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-input" />
+            <span class="validation-message" asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <input class="form-submit-btn" type="submit" value="@(isEdit ? "Edit" : "Create")" />
+        </div>
+    </form>
+</div>
