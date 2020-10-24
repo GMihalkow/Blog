@@ -1,12 +1,38 @@
-﻿<div class="nav-wrapper">
+﻿<section class="nav-wrapper">
     <nav class="nav">
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Suggestions</a></li>
             <li><a href="#">Comments</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                <li class="dropdown-container">
+                    <a href="javascript:void(0)" class="dropdown-btn fas fa-unlock-alt fa-lg"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="/">Articles</a></li>
+                            <li><a asp-controller="Category" asp-action="Search">Categories</a></li>
+                        </ul>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+            }
+        </ul>
+        <ul class="hidden-nav">
+            <a id="hidden-nav-btn" class="p-1 d-inline-block" href="javascript:void(0)"><i class="fas fa-bars fa-2x"></i></a>
+            <div class="hidden-dropdown">
+                <div class="hidden-dropdown-list">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Car" asp-action="Featured">Featured Cars</a></li>
+                    </ul>
+                </div>
+            </div>
         </ul>
     </nav>
-</div>
+</section>
