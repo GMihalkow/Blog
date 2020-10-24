@@ -1,0 +1,23 @@
+﻿@model Blog.Web.Models.Account.LoginInputModel
+@{
+    ViewBag.RegisterJQueryValidation = true;
+}
+
+<div class="form-wrapper">
+    <form class="form" asp-action="Login" method="post">
+        <div class="validation-message" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Username" class="form-label"></label>
+            <input asp-for="Username" class="form-input" />
+            <span class="validation-message" asp-validation-for="Username"></span>
+        </div>
+        <div>
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-input" />
+            <span class="validation-message" asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <input class="form-submit-btn" type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
