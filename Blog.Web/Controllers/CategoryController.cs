@@ -1,4 +1,5 @@
-﻿using Blog.Dal.Models.Category;
+﻿using Blog.Dal.Infrastructure.Constants;
+using Blog.Dal.Models.Category;
 using Blog.Dal.Services.Categories.Contracts;
 using Blog.Web.Infrastructure.Constants;
 using Blog.Web.Infrastructure.Extensions;
@@ -38,6 +39,7 @@ namespace Blog.Web.Controllers
 
             categoryInputModel.CreatorId = await this.GetLoggedUserId();
             await this._categoryService.Create(categoryInputModel);
+            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, string.Format(DalConstants.SuccessMessage, "created", "category")));
 
             return this.RedirectToAction(nameof(Search));
         }
@@ -79,6 +81,7 @@ namespace Blog.Web.Controllers
             }
 
             await this._categoryService.Edit(categoryEditModel);
+            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, string.Format(DalConstants.SuccessMessage, "edited", "category")));
 
             return this.RedirectToAction(nameof(Search));
         }
@@ -91,7 +94,7 @@ namespace Blog.Web.Controllers
                 return this.NotFound();
 
             await this._categoryService.Delete(id);
-            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, "Successfully deleted category."));
+            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, string.Format(DalConstants.SuccessMessage, "deleted", "category")));
 
             return this.RedirectToAction(nameof(Search));
         }
