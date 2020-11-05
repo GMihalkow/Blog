@@ -5,12 +5,13 @@
 }
 
 <div class="custom-table-wrapper">
-    <h2 class="text-center">Categories</h2>
+    <h2 class="text-center custom-table-heading">Categories</h2>
     <partial name="_AlertPartial" model="@TempData.GetValue<Alert>(WebConstants.AlertKey)" />
     <div class="custom-table-toolbar">
-        <input id="category-search-toolbar-input" class="custom-table-toolbar-input" type="text" placeholder="Search categories..." />
-        <a id="category-submit-search-btn" href="javascript:void(0)" class="custom-table-btn">Submit</a>
-        <a asp-action="Create" class="custom-table-btn">Create</a>
+        <input id="category-search-toolbar-input" class="custom-table-toolbar-input custom-table-toolbar-element" type="text" 
+               placeholder="Search categories..." />
+        <a id="category-submit-search-btn" href="javascript:void(0)" class="custom-table-btn custom-table-toolbar-element">Submit</a>
+        <a asp-action="Create" class="custom-table-btn custom-table-toolbar-element">Create</a>
     </div>
     <div id="categories-table" class="custom-table"></div>
 </div>
@@ -53,10 +54,11 @@
                 columns: [
                     { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: false },
                     { field: 'id', visible: false },
-                    { field: 'name', title: 'Name', responsive: 0 },
+                    { field: 'name', title: 'Name', responsive: 0, minWidth: 100 },
                     {
                         field: 'createdOn',
                         title: 'Created On',
+                        minWidth: 100,
                         sorterParams: { format: "YYYY-MM-DDTHH:mm:ss.sssZ" },
                         formatter: 'datetime',
                         formatterParams: {
@@ -66,11 +68,12 @@
                         },
                         responsive: 1
                     },
-                    { field: 'creatorName', title: 'Creator', responsive: 2 },
+                    { field: 'creatorName', title: 'Creator', responsive: 2, minWidth: 100 },
                     {
                         title: 'Actions',
                         headerSort: false,
                         responsive: 0,
+                        minWidth: 100,
                         formatter: function (cell) {
                             var div = document.createElement('div');
                             div.classList.add('custom-table-actions-col');
