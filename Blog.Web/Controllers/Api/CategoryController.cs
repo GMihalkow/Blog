@@ -1,10 +1,8 @@
 ﻿using Blog.Dal.Models.Category;
-using Blog.Dal.Models.Common;
 using Blog.Dal.Services.Categories.Contracts;
 using Blog.Web.Infrastructure.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers.Api
