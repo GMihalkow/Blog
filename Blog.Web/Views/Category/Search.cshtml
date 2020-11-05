@@ -47,6 +47,9 @@
                 paginationSize: 10,
                 placeholder: 'No categories found',
                 resizableColumns: false,
+                dataLoaded: function () {
+                    modalFunctions.bindConfirmModalBtns();
+                },
                 columns: [
                     { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: false },
                     { field: 'id', visible: false },
@@ -89,8 +92,6 @@
                             deleteBtn.href = '@this.Url.Action("Delete")/' + cell.getData().id;
 
                             div.appendChild(deleteBtn);
-
-                            modalFunctions.bindConfirmModalBtns();
 
                             return div;
                         }
