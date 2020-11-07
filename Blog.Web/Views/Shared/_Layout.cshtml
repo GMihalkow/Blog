@@ -13,6 +13,11 @@
         <link href="~/lib/tabulator/css/tabulator.min.css" rel="stylesheet" />
         <link href="~/lib/tabulator/css/tabulator_midnight.min.css" rel="stylesheet" />
     }
+    
+    @if (ViewBag.RegisterTrumbowygJs == true)
+    {
+        <link href="~/lib/Trumbowyg/ui/trumbowyg.min.css" rel="stylesheet" />
+    }
 </head>
 <body>
     <partial name="_MenuPartial.cshtml"/>
@@ -44,6 +49,12 @@
     {
         <script type="text/javascript" src="~/js/modal.js"></script>
         <partial name="_ModalPartial" />
+    }
+
+    @if (ViewBag.RegisterTrumbowygJs == true)
+    {
+        <script src="~/lib/Trumbowyg/trumbowyg.min.js"></script>
+        <script src="~/lib/Trumbowyg/langs/bg.min.js"></script>
     }
 
     @RenderSection("Scripts", required: false)
