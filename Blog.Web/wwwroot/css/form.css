@@ -8,15 +8,6 @@
     border-radius: 3px;
 }
 
-h2.form-h2 {
-    text-align: center;
-    font-size: 30px;
-    padding-bottom: 1rem;
-    border-bottom: #000 solid 5px;
-    width: 70%;
-    margin: 0 auto;
-}
-
 .form-label {
     text-align: center;
     font-weight: bold;
@@ -50,6 +41,15 @@ h2.form-h2 {
 .form-wrapper {
     margin: 5rem auto;
     max-width: 60rem;
+}
+
+h2.form-h2 {
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 1rem;
+    border-bottom: #000 solid 5px;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .form > div {
