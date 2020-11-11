@@ -14,7 +14,7 @@ namespace Blog.Models
 
         public string CreatorId { get; set; }
 
-        public User User { get; set; }
+        public User Creator { get; set; }
 
         public string CategoryId { get; set; }
 
