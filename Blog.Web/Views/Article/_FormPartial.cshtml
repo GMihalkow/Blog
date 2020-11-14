@@ -1,0 +1,56 @@
+﻿@model ArticleInputModel
+@using Blog.Dal.Models.Article;
+@{ 
+    var isEdit = Model is ArticleEditModel;
+}
+
+<div class="form-wrapper">
+    <form id="create-article-form" class="form" asp-action="@(isEdit ? "Edit" : "Create")" method="@FormMethod.Post">
+        <h2 class="form-h2">@(isEdit ? "Edit" : "Create") Article</h2>
+        <div class="validation-message" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-input" />
+            <span class="validation-message" asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="CategoryId" class="form-label"></label>
+            <select asp-for="CategoryId" class="form-input" />
+            <span class="validation-message" asp-validation-for="CategoryId"></span>
+        </div>
+        <div>
+            <label asp-for="Content" class="form-label"></label>
+            <textarea asp-for="Content" class="form-input"></textarea>
+            <span class="validation-message" asp-validation-for="Content"></span>
+        </div>
+        <div>
+            <input class="form-submit-btn" type="submit" value="@(isEdit ? "Edit" : "Create")" />
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#@Html.IdFor(m => m.Content)').trumbowyg();
+
+        $.ajax({
+            url: '/api/Category/GetAllForDropdown',
+            dataType: 'json',
+            success: function (res) {
+                var categories = res;
+                var $categoryIdSelectlist = $('#@Html.IdFor(m => m.CategoryId)');
+
+                categories.forEach(function (c) {
+                    var $option = $('<option></option>');
+                    $option.text(c.name);
+                    $option.attr('value', c.id);
+
+                    $categoryIdSelectlist.append($option);
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+</script>
