@@ -1,6 +1,7 @@
 ﻿using Blog.Dal.Models.Category;
 using Blog.Dal.Models.Common;
 using Blog.Dal.Models.Common.Contracts;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Blog.Dal.Services.Categories.Contracts
@@ -10,6 +11,8 @@ namespace Blog.Dal.Services.Categories.Contracts
         Task<CategoryViewModel> GetByName(string name);
 
         Task<CategoryViewModel> GetById(string id);
+
+        Task<IEnumerable<CategoryDropdownListModel>> GetAllForDropdown();
 
         Task<ISearchResponseModel<CategorySearchViewModel>> GetAll(IBaseSearchModel searchModel);
 

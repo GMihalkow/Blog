@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers.Api
 {
-    [ApiController]
-    [Route("{api}/{controller}/{action}")]
     [Authorize(Roles = RoleConstants.Administrator)]
-    public class CategoryController : Controller
+    public class CategoryController : BaseApiController
     {
         private readonly ICategoryService _categoryService;
 
@@ -20,5 +18,9 @@ namespace Blog.Web.Controllers.Api
         [HttpGet]
         public async Task<JsonResult> GetAll([FromQuery] CategorySearchModel searchModel)
             => this.Json(await this._categoryService.GetAll(searchModel));
+
+        [HttpGet]
+        public async Task<JsonResult> GetAllForDropdown()
+            => this.Json(await this._categoryService.GetAllForDropdown());
     }
 }

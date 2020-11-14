@@ -1,12 +1,13 @@
-﻿using Blog.Data;
-using Blog.Models;
-using Blog.Dal.Infrastructure.Extensions;
+﻿using Blog.Dal.Infrastructure.Extensions;
 using Blog.Dal.Models.Category;
 using Blog.Dal.Models.Common;
 using Blog.Dal.Models.Common.Contracts;
 using Blog.Dal.Services.Categories.Contracts;
+using Blog.Data;
+using Blog.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -25,6 +26,20 @@ namespace Blog.Dal.Services.Categories
 
         public async Task<CategoryViewModel> GetByName(string name)
             => await this.Get(c => c.Name == name);
+
+        public async Task<IEnumerable<CategoryDropdownListModel>> GetAllForDropdown()
+        {
+            var categories = await this._dbContext
+                .Categories
+                .Select(c => new CategoryDropdownListModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToListAsync();
+
+            return categories;
+        }
 
         public async Task<ISearchResponseModel<CategorySearchViewModel>> GetAll(IBaseSearchModel searchModel)
         {
