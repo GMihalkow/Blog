@@ -14,7 +14,14 @@ namespace Blog.Data.EntityConfiguration
             builder
                 .HasMany(u => u.Categories)
                 .WithOne(c => c.Creator)
+                .HasForeignKey(c => c.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany(u => u.Articles)
+                .WithOne(a => a.Creator)
+                .HasForeignKey(a => a.CreatorId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

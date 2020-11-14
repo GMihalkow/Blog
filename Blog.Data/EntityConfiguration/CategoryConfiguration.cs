@@ -27,6 +27,7 @@ namespace Blog.Data.EntityConfiguration
             builder
                 .HasMany(c => c.Articles)
                 .WithOne(a => a.Category)
+                .HasForeignKey(a => a.CategoryId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder
