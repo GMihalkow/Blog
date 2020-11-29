@@ -1,6 +1,6 @@
 ﻿using Blog.Dal.Models.Article;
+using Blog.Dal.Models.Article.Contracts;
 using Blog.Dal.Models.Common;
-using Blog.Dal.Models.Common.Contracts;
 using System.Threading.Tasks;
 
 namespace Blog.Dal.Services.Articles.Contracts
@@ -9,7 +9,7 @@ namespace Blog.Dal.Services.Articles.Contracts
     {
         Task<ArticleViewModel> GetById(string id);
 
-        Task<ISearchResponseModel<ArticleSearchViewModel>> GetAll(IBaseSearchModel searchModel);
+        Task<ISearchResponseModel<ArticleSearchViewModel>> GetAll(IArticleSearchModel searchModel);
 
         Task Create(ArticleInputModel model);
 

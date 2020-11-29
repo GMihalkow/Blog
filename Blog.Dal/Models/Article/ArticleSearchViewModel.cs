@@ -8,8 +8,6 @@ namespace Blog.Dal.Models.Article
 
         public string Title { get; set; }
 
-        public string CategoryId { get; set; }
-
         public string CategoryName { get; set; }
 
         public string CreatorId { get; set; }

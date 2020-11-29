@@ -1,8 +1,8 @@
 ﻿using Blog.Dal.Infrastructure.Constants;
 using Blog.Dal.Infrastructure.Extensions;
 using Blog.Dal.Models.Article;
+using Blog.Dal.Models.Article.Contracts;
 using Blog.Dal.Models.Common;
-using Blog.Dal.Models.Common.Contracts;
 using Blog.Dal.Services.Articles.Contracts;
 using Blog.Data;
 using Blog.Models;
@@ -40,16 +40,16 @@ namespace Blog.Dal.Services.Articles
             return articleViewModel;
         }
 
-        public async Task<ISearchResponseModel<ArticleSearchViewModel>> GetAll(IBaseSearchModel searchModel)
+        public async Task<ISearchResponseModel<ArticleSearchViewModel>> GetAll(IArticleSearchModel searchModel)
         {
             var filteredArticles = await this._dbContext
                 .Articles
                 .Where(a => searchModel.Keywords.IsNullOrEmpty() || a.Title.StartsWith(searchModel.Keywords))
+                .Where(a => searchModel.CategoryId.IsNullOrEmpty() || a.CategoryId == searchModel.CategoryId)
                 .Select(a => new ArticleSearchViewModel
                 {
                     Id = a.Id,
                     Title = a.Title,
-                    CategoryId = a.CategoryId,
                     CategoryName = a.Category != null ? a.Category.Name : "None",
                     CreatedOn = a.CreatedOn,
                     CreatorId = a.CreatorId,
