@@ -16,10 +16,6 @@ namespace Blog.Web.Controllers.Api
 
         [HttpGet]
         public async Task<JsonResult> GetAll([FromQuery] ArticleSearchModel searchModel)
-        {
-            var response = await this._articleService.GetAll(searchModel);
-
-            return this.Json(response);
-        }
+            => this.Json(await this._articleService.GetAll(searchModel));
     }
 }

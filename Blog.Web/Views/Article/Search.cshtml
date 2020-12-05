@@ -22,24 +22,27 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
+            var $articleSearchBar = $('#article-search-toolbar-input');
+            $articleSearchBar.val('');
+
+            var $articleSubmitBtn = $('#article-submit-search-btn');
+            $articleSubmitBtn.on('click', function () {
+                table.setFilter('name', 'like', $articleSearchBar.val());
+            });
+
+            var $categoriesSelect = $('#categories-select-list');
+            $categoriesSelect.on('change', function () {
+                $articleSubmitBtn.trigger('click');
+            });
 
             $.ajax({
                 url: '/api/Category/GetAllForDropdown',
                 dataType: 'json',
                 success: function (categories) {
-                    var $categoriesSelect = $('#categories-select-list');
-
                     categories.forEach(function (c) {
                         $categoriesSelect.append('<option value="' + c.id + '">' + c.name + '</option>');
                     });
                 }
-            });
-
-            var $articleSearchBar = $('#article-search-toolbar-input');
-            $articleSearchBar.val('');
-
-            $('#article-submit-search-btn').on('click', function () {
-                table.setFilter('name', 'like', $articleSearchBar.val());
             });
 
             // TODO [GM]: Extract to tag helper
