@@ -7,13 +7,13 @@
         font-size: 20px;
     }
 
-    .custom-table-toolbar .custom-table-toolbar-element {
-        display: block;
-        width: 90%;
-        padding: 0.5rem 0.2rem;
-        text-align: center;
-        margin: 1rem auto;
-    }
+        .custom-table-toolbar .custom-table-toolbar-element, .custom-table-toolbar .custom-table-select {
+            display: block;
+            width: 90%;
+            padding: 0.5rem 0.2rem;
+            text-align: center;
+            margin: 1rem auto;
+        }
 
     .custom-table-wrapper > h2.custom-table-heading {
         font-size: 50px;
