@@ -1,10 +1,22 @@
 ﻿@media only screen and (max-width: 500px) {
+    .big-nav {
+        display: none;
+    }
+
+    .hidden-nav {
+        display: block;
+    }
+
     .custom-table-toolbar {
         display: block;
     }
 
     .custom-table-toolbar > input {
         font-size: 20px;
+    }
+
+    .hidden-nav li a {
+        font-size: 22px;
     }
 
         .custom-table-toolbar .custom-table-toolbar-element, .custom-table-toolbar .custom-table-select {

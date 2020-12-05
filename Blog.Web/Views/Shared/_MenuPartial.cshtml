@@ -1,6 +1,6 @@
 ﻿<section class="nav-wrapper">
     <nav class="nav">
-        <ul>
+        <ul class="big-nav">
             <li><a asp-action="Index" asp-controller="Home">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Suggestions</a></li>
@@ -24,12 +24,38 @@
             }
         </ul>
         <ul class="hidden-nav">
-            <a id="hidden-nav-btn" class="p-1 d-inline-block" href="javascript:void(0)"><i class="fas fa-bars fa-2x"></i></a>
+            <a id="hidden-nav-btn" class="p-1 d-inline-block" href="javascript:void(0)"><i class="fas fa-bars fa-3x"></i></a>
             <div class="hidden-dropdown">
                 <div class="hidden-dropdown-list">
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Car" asp-action="Featured">Featured Cars</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Suggestions</a></li>
+                        <li><a href="#">Comments</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole(RoleConstants.Administrator))
+                            {
+                                <li>
+                                    <ul class="hidden-nav">
+                                        <a id="hidden-nav-btn" class="p-1 d-inline-block" href="javascript:void(0)">Admin <i class="fas fa-unlock-alt fa-lg"></i></a>
+                                        <div class="hidden-dropdown">
+                                            <div class="hidden-dropdown-list">
+                                                <ul>
+                                                    <li><a asp-controller="Article" asp-action="Search">Articles</a></li>
+                                                    <li><a asp-controller="Category" asp-action="Search">Categories</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </li>
+                            }
+                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                        }
                     </ul>
                 </div>
             </div>

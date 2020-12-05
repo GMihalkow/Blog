@@ -54,6 +54,7 @@
 
 
 .nav > ul.hidden-nav {
+    background-color: #fff;
     padding: 0;
     position: relative;
     list-style: none;
@@ -62,7 +63,7 @@
     margin: 0 auto;
 }
 
-.nav > ul:not(.hidden-nav) > li:first-child {
+.nav > .big-nav > li:first-child {
     font-size: 26px;
     margin-right: 2rem;
 }
