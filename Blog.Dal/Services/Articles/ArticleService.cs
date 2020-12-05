@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Blog.Dal.Services.Articles
 {
@@ -70,11 +71,12 @@ namespace Blog.Dal.Services.Articles
         public async Task Create(ArticleInputModel model)
         {
             var sanitizer = new HtmlSanitizer(DalConstants.AllowedHtmlTags);
+            var decodedContent = HttpUtility.HtmlDecode(model.Content);
 
             var article = new Article
             {
                 CategoryId = model.CategoryId,
-                Content = sanitizer.Sanitize(model.Content),
+                Content = sanitizer.Sanitize(decodedContent),
                 Title = model.Title,
                 CreatorId = model.CreatorId
             };
@@ -90,10 +92,11 @@ namespace Blog.Dal.Services.Articles
             if (article == null) return;
 
             var sanitizer = new HtmlSanitizer(DalConstants.AllowedHtmlTags);
+            var decodedContent = HttpUtility.HtmlDecode(model.Content);
 
             article.Title = model.Title;
             article.CategoryId = model.CategoryId;
-            article.Content = sanitizer.Sanitize(model.Content);
+            article.Content = sanitizer.Sanitize(decodedContent);
 
             this._dbContext.Update(article);
             await this._dbContext.SaveChangesAsync();
