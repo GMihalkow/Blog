@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Blog.Dal.Infrastructure.Attributes.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Blog.Dal.Models.Article
@@ -11,6 +12,10 @@ namespace Blog.Dal.Models.Article
 
         [Required]
         public string Content { get; set; }
+
+        [ImageUrl(ErrorMessage = "Invalid image url.")]
+        [DisplayName("Cover")]
+        public string CoverUrl { get; set; }
 
         [Required]
         [DisplayName("Category")]

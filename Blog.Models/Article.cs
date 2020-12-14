@@ -8,6 +8,8 @@ namespace Blog.Models
 
         public string Content { get; set; }
 
+        public string CoverUrl { get; set; }
+
         public int ViewsCount { get; set; }
 
         public DateTime CreatedOn { get; set; }

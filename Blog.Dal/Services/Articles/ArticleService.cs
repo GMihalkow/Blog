@@ -78,7 +78,8 @@ namespace Blog.Dal.Services.Articles
                 CategoryId = model.CategoryId,
                 Content = sanitizer.Sanitize(decodedContent),
                 Title = model.Title,
-                CreatorId = model.CreatorId
+                CreatorId = model.CreatorId,
+                CoverUrl = model.CoverUrl
             };
 
             await this._dbContext.Articles.AddAsync(article);
@@ -97,6 +98,7 @@ namespace Blog.Dal.Services.Articles
             article.Title = model.Title;
             article.CategoryId = model.CategoryId;
             article.Content = sanitizer.Sanitize(decodedContent);
+            article.CoverUrl = model.CoverUrl;
 
             this._dbContext.Update(article);
             await this._dbContext.SaveChangesAsync();

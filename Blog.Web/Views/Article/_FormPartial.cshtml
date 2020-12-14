@@ -15,8 +15,13 @@
         </div>
         <div>
             <label asp-for="CategoryId" class="form-label"></label>
-            <select asp-for="CategoryId" class="form-input" />
+            <select asp-for="CategoryId" class="form-input" ></select>
             <span class="validation-message" asp-validation-for="CategoryId"></span>
+        </div>
+        <div>
+            <label asp-for="CoverUrl" class="form-label"></label>
+            <input asp-for="CoverUrl" class="form-input" />
+            <span class="validation-message" asp-validation-for="CoverUrl"></span>
         </div>
         <div>
             <label asp-for="Content" class="form-label"></label>
@@ -31,6 +36,7 @@
 
 <script type="text/javascript">
     $(function () {
+        // text editor library
         $('#@Html.IdFor(m => m.Content)').trumbowyg();
 
         $.ajax({
