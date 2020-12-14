@@ -6,6 +6,8 @@
 
         public const string SuccessMessage = "Successfully {0} {1}.";
 
+        public const string ImageUrlRegex = @"^(https?:\/\/.*\.(?:png|jpg|jpeg))$";
+
         public static string[] AllowedHtmlTags = new string[]
         {
             "h1",
