@@ -25,6 +25,16 @@ namespace Blog.Web.Controllers
 
         public IActionResult Search() => this.View();
 
+        // TODO [GM]: Implement views filter
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            var article = await this._articleService.GetById(id);
+            if (article == null) return this.NotFound();
+
+            return this.View(article);
+        }
+
         public IActionResult Create() => this.View();
 
         [HttpPost]

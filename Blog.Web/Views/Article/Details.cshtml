@@ -1,0 +1,23 @@
+﻿@model Blog.Dal.Models.Article.ArticleViewModel
+@{ 
+    ViewBag.Title = Model.Title;
+}
+
+<section class="article-wrapper">
+    <header>
+        <h1 class="article-title">@Model.Title</h1>
+        <hr class="article-title-separater" />
+        <section class="article-info">
+            <div><i class="fas fa-calendar-day"></i> @Model.CreatedOn.ToWebDateFormat()</div>
+            <!-- TODO [GM]: implement redirect to author page  -->
+            <div><i class="fas fa-user"></i> @Model.CreatorName</div>
+            <div class="ml-auto"><i class="far fa-eye"></i> @Model.ViewsCount</div>
+        </section>
+    </header>
+    <section class="article-cover-img-wrapper">
+        <img class="article-cover-img" src="@Model.CoverUrl" alt="Alternate Text" />
+    </section>
+    <section class="article-body">
+        @Html.Raw(Model.Content)
+    </section>
+</section>

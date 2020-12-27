@@ -10,6 +10,10 @@ a.link-btn {
     padding: 1rem;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .d-inline-block {
     display: inline-block;
 }

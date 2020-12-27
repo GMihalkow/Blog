@@ -1,0 +1,50 @@
+﻿.article-wrapper {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.article-title-separater {
+    border-radius: 3px;
+    border: none;
+    height: 1px;
+    background-color: #000;
+    margin-bottom: 1rem;
+}
+
+.article-body {
+    margin: 1rem 1.5rem;
+}
+
+.article-cover-img-wrapper {
+    margin-top: 1rem;
+    display: block;
+    position: relative;
+    height: 35rem;
+    overflow: hidden;
+}
+
+.article-cover-img {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    width: 95%;
+    transform: translateY(-50%);
+}
+
+.article-info {
+    margin: 0 1.5rem;
+    display: flex;
+}
+
+    .article-info > div {
+        margin-right: 0.5rem;
+    }
+
+.article-wrapper .article-title {
+    text-align: center;
+    font-size: 42px;
+    margin: 0 0;
+    padding: 1rem 0;
+}
