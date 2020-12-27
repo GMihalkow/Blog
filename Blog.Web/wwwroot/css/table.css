@@ -37,6 +37,11 @@
     border-radius: 3px;
 }
 
+.custom-table-toolbar .custom-table-select, .custom-table-toolbar .custom-table-select * {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 .custom-table-toolbar > * {
     margin-right: 0.5rem;
 }
