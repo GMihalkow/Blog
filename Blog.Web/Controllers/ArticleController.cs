@@ -4,6 +4,7 @@ using Blog.Dal.Services.Articles.Contracts;
 using Blog.Dal.Services.Categories.Contracts;
 using Blog.Web.Infrastructure.Constants;
 using Blog.Web.Infrastructure.Extensions;
+using Blog.Web.Infrastructure.Filters;
 using Blog.Web.Models.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace Blog.Web.Controllers
 
         public IActionResult Search() => this.View();
 
-        // TODO [GM]: Implement views filter
+        [ViewsFilter]
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
