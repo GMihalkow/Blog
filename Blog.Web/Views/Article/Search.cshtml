@@ -12,9 +12,8 @@
                placeholder="Search articles..." />
         <a id="article-submit-search-btn" href="javascript:void(0)" class="custom-table-btn custom-table-toolbar-element">Submit</a>
         <a asp-action="Create" class="custom-table-btn custom-table-toolbar-element">Create</a>
-        <select id="categories-select-list" class="custom-table-select">
-            <option value="">Select a category...</option>
-        </select>
+        <select id="categories-select-list" class="custom-table-select"><option value="">Select a category...</option></select>
+        <select id="authors-select-list" class="custom-table-select"><option value="">Select an author...</option></select>
     </div>
     <div id="categories-table" class="custom-table"></div>
 </div>
@@ -45,6 +44,21 @@
                 }
             });
 
+            var $authorsSelect = $('#authors-select-list');
+            $authorsSelect.on('change', function () {
+                $articleSubmitBtn.trigger('click');
+            });
+
+            $.ajax({
+                url: '/api/User/GetAllForDropdown',
+                dataType: 'json',
+                success: function (users) {
+                    users.forEach(function (u) {
+                        $authorsSelect.append('<option value="' + u.id + '">' + u.name + '</option>');
+                    });
+                }
+            });
+
             // TODO [GM]: Extract to tag helper
             var table = new Tabulator('#categories-table', {
                 height: 'auto',
@@ -64,6 +78,11 @@
                     var $categoriesList = $('#categories-select-list');
                     if ($categoriesList.val()) {
                         query.push('categoryId=' + $categoriesList.val());
+                    }
+
+                    var $authorsList = $('#authors-select-list');
+                    if ($authorsList.val()) {
+                        query.push('creatorId=' + $authorsList.val());
                     }
 
                     return '/api/Article/GetAll?' + query.join('&');
@@ -103,28 +122,19 @@
                         responsive: 0,
                         minWidth: 100,
                         formatter: function (cell) {
-                            var div = document.createElement('div');
-                            div.classList.add('custom-table-actions-col');
+                            var container = $('<div class="custom-table-actions-col"></div>');
+                            var articleId = cell.getData().id;
 
-                            var editBtn = document.createElement('a');
-                            editBtn.textContent = 'Edit';
-                            editBtn.classList.add('custom-table-btn');
-                            editBtn.href = '@this.Url.Action("Edit")/' + cell.getData().id;
+                            var editBtn = $('<a class="custom-table-btn" href="' + '@this.Url.Action("Edit")/' + articleId + '"><i class="fas fa-edit"></i></a>');
+                            container.append(editBtn);
 
-                            div.appendChild(editBtn);
+                            var deleteBtn = $('<a class="custom-table-btn" confirm-modal-btn confirm-modal-message="Are you sure that you want to delete this article?" href="' + '@this.Url.Action("Delete")/' + articleId + '"><i class="fas fa-trash-alt"></i>');
+                            container.append(deleteBtn);
 
-                            var deleteBtn = document.createElement('a');
-                            deleteBtn.textContent = 'Delete';
+                            var detailsBtn = $('<a class="custom-table-btn" href="' + '@this.Url.Action("Details")/' + articleId + '"><i class="fas fa-eye"></i></a>');
+                            container.prepend(detailsBtn);
 
-                            deleteBtn.setAttribute('confirm-modal-btn', '');
-                            deleteBtn.setAttribute('confirm-modal-message', 'Are you sure that you want to delete this article?');
-
-                            deleteBtn.classList.add('custom-table-btn');
-                            deleteBtn.href = '@this.Url.Action("Delete")/' + cell.getData().id;
-
-                            div.appendChild(deleteBtn);
-
-                            return div;
+                            return container[0];
                         }
                     }
                 ]

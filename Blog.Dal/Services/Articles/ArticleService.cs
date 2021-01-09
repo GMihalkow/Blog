@@ -50,6 +50,7 @@ namespace Blog.Dal.Services.Articles
                 .Articles
                 .Where(a => searchModel.Keywords.IsNullOrEmpty() || a.Title.StartsWith(searchModel.Keywords))
                 .Where(a => searchModel.CategoryId.IsNullOrEmpty() || a.CategoryId == searchModel.CategoryId)
+                .Where(a => searchModel.CreatorId.IsNullOrEmpty() || a.CreatorId == searchModel.CreatorId)
                 .Select(a => new ArticleSearchViewModel
                 {
                     Id = a.Id,

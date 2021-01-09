@@ -12,5 +12,7 @@ namespace Blog.Dal.Models.Article
         public int? Page { get; set; } = 0;
 
         public string CategoryId { get; set; }
+
+        public string CreatorId { get; set; }
     }
 }
