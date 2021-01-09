@@ -12,7 +12,7 @@ namespace Blog.Dal.Infrastructure.Attributes.Validation
         {
             var regex = new Regex(DalConstants.ImageUrlRegex, RegexOptions.IgnoreCase);
 
-            return regex.IsMatch(value.ToString());
+            return regex.IsMatch(value?.ToString() ?? string.Empty);
         }
     }
 }
