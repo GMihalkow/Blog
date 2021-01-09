@@ -16,5 +16,7 @@ namespace Blog.Dal.Services.Articles.Contracts
         Task Edit(ArticleEditModel model);
 
         Task Delete(string id);
+
+        void IncrementViews(string articleId);
     }
 }

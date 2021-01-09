@@ -10,7 +10,14 @@
         <section class="article-info">
             <div><i class="fas fa-calendar-day"></i> @Model.CreatedOn.ToWebDateFormat()</div>
             <!-- TODO [GM]: implement redirect to author page  -->
-            <div><i class="fas fa-user"></i> @Model.CreatorName</div>
+            @if (!string.IsNullOrEmpty(Model.CreatorId))
+            {
+                <div><a href="#"><i class="fas fa-user"></i> @Model.CreatorName</a></div>
+            }
+            else
+            {
+                <div><i class="fas fa-user"></i> @Model.CreatorName</div>
+            }
             <div class="ml-auto"><i class="far fa-eye"></i> @Model.ViewsCount</div>
         </section>
     </header>

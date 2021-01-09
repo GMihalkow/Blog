@@ -24,18 +24,21 @@ namespace Blog.Dal.Services.Articles
 
         public async Task<ArticleViewModel> GetById(string id)
         {
-            var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == id);
+            var article = await this._dbContext.Articles.Include((a) => a.Creator).FirstOrDefaultAsync((a) => a.Id == id);
 
-            if (article == null)
-                return null;
+            if (article == null) return null;
 
             var articleViewModel = new ArticleViewModel
             {
                 Id = article.Id,
                 Title = article.Title,
                 Content = article.Content,
+                CoverUrl = article.CoverUrl,
                 CategoryId = article.CategoryId,
-                CreatorId = article.CreatorId
+                CreatorId = article.CreatorId,
+                CreatorName = article.Creator?.UserName ?? "No Author",
+                CreatedOn = article.CreatedOn,
+                ViewsCount = article.ViewsCount
             };
 
             return articleViewModel;
@@ -89,7 +92,6 @@ namespace Blog.Dal.Services.Articles
         public async Task Edit(ArticleEditModel model)
         {
             var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == model.Id);
-
             if (article == null) return;
 
             var sanitizer = new HtmlSanitizer(DalConstants.AllowedHtmlTags);
@@ -107,12 +109,21 @@ namespace Blog.Dal.Services.Articles
         public async Task Delete(string id)
         {
             var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == id);
+            if (article == null) return;
 
-            if (article != null)
-            {
-                this._dbContext.Articles.Remove(article);
-                await this._dbContext.SaveChangesAsync();
-            }
+            this._dbContext.Articles.Remove(article);
+            await this._dbContext.SaveChangesAsync();
+        }
+
+        public void IncrementViews(string articleId)
+        {
+            var article = this._dbContext.Articles.FirstOrDefault((a) => a.Id == articleId);
+            if (article == null) return;
+
+            article.ViewsCount++;
+
+            this._dbContext.Articles.Update(article);
+            this._dbContext.SaveChanges();
         }
     }
 }
