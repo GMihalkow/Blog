@@ -2,10 +2,7 @@
 
 namespace Blog.Dal.Models.Category
 {
-    public class CategoryDropdownListModel : IBaseDropdownListModel<string>
+    public class CategoryDropdownListModel : BaseDropdownListModel<string>
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
     }
 }
