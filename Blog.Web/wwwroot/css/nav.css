@@ -1,4 +1,8 @@
-﻿.nav {
+﻿.nav-wrapper {
+    background-color: #fff;
+}
+
+.nav {
     margin: 0 auto;
     max-width: 50rem;
 }
