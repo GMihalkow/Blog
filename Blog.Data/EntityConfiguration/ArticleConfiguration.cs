@@ -21,6 +21,10 @@ namespace Blog.Data.EntityConfiguration
                 .IsRequired();
 
             builder
+                .Property(a => a.CoverUrl)
+                .IsRequired();
+
+            builder
                 .Property(a => a.Content)
                 .IsRequired(false);
 

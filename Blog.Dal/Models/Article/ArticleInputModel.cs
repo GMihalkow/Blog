@@ -15,6 +15,7 @@ namespace Blog.Dal.Models.Article
 
         [ImageUrl(ErrorMessage = "Invalid image url.")]
         [DisplayName("Cover")]
+        [Required]
         public string CoverUrl { get; set; }
 
         [Required]
