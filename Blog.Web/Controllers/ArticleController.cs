@@ -74,7 +74,8 @@ namespace Blog.Web.Controllers
                 Id = articleViewModel.Id,
                 Title = articleViewModel.Title,
                 Content = articleViewModel.Content,
-                CategoryId = articleViewModel.CategoryId
+                CategoryId = articleViewModel.CategoryId,
+                CoverUrl = articleViewModel.CoverUrl
             };
 
             return this.View(articleEditModel);
