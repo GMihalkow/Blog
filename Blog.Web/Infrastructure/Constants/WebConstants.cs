@@ -5,5 +5,7 @@
         public const string AlertKey = "Alert";
 
         public const string WebDateFormat = "yyyy-MM-dd";
+
+        public const int IndexArticleTitleLength = 40;
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Blog.Dal.Models.Article
+﻿using System;
+
+namespace Blog.Dal.Models.Article
 {
     public class ArticleIndexModel
     {
@@ -7,5 +9,7 @@
         public string Title { get; set; }
 
         public string CoverUrl { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

@@ -7,3 +7,56 @@
 .main {
     min-height: 100%;
 }
+
+.main-body {
+    margin: 0 auto;
+    width: 50rem;
+    display: flex;
+}
+
+.popular-index-article-info {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.popular-index-articles-wrapper {
+    width: 35rem;
+    margin: 0 auto;
+}
+
+.popular-index-article {
+    display: flex;
+    transition: all .2s ease-in-out;
+}
+
+.index-articles-header {
+    font-size: 22px;
+    border-bottom: 2px solid #000;
+}
+
+.index-article-date {
+    color: #444;
+}
+
+img.popular-index-article-image {
+    width: auto;
+    height: 10rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 0;
+}
+
+.popular-index-article-image-wrapper {
+    width: 12.5rem;
+    position: relative;
+    height: 10rem;
+    overflow: hidden;
+    margin: 1rem 0;
+    border-radius: 3px;
+}
+
+.popular-index-article:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

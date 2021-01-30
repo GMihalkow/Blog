@@ -1,4 +1,29 @@
 ﻿@model Blog.Dal.Models.Index.IndexPageViewModel
 
 <div class="main-body">
+    <section class="popular-index-articles-wrapper">
+        <header class="index-articles-header">Popular Articles</header>
+        @foreach (var popularArticle in Model.PopularArticles)
+        {
+            <section class="popular-index-article" article-id="@popularArticle.Id">
+                <div class="popular-index-article-image-wrapper">
+                    <img src="@(popularArticle.CoverUrl)" class="popular-index-article-image" />
+                </div>
+                <div class="popular-index-article-info">
+                    <h2 class="index-article-title">@popularArticle.Title.TrimText(WebConstants.IndexArticleTitleLength)</h2>
+                    <div class="index-article-date">@popularArticle.CreatedOn.ToWebDateFormat()</div>
+                </div>
+            </section>
+        }
+    </section>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.popular-index-article').on('click', function (e) {
+            var $el = $(e.currentTarget);
+            
+            window.location.href = '@Url.Action("Details", "Article")/' + $el.attr('article-id');
+        });
+    </script>
+} 

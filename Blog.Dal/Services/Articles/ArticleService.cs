@@ -9,7 +9,9 @@ using Blog.Models;
 using Ganss.XSS;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -21,6 +23,28 @@ namespace Blog.Dal.Services.Articles
 
         public ArticleService(BlogDbContext dbContext)
              => this._dbContext = dbContext;
+
+        public async Task<IEnumerable<ArticleIndexModel>> GetPopularArticles(int count) 
+            => await this.GetMappedArticles(3,
+            (a) => new ArticleIndexModel
+            {
+                Id = a.Id,
+                Title = a.Title,
+                CoverUrl = a.CoverUrl,
+                CreatedOn = a.CreatedOn
+            },
+            (a) => a.ViewsCount);
+
+        public async Task<IEnumerable<ArticleIndexModel>> GetLatestArticles(int count)
+           => await this.GetMappedArticles(3,
+           (a) => new ArticleIndexModel
+           {
+               Id = a.Id,
+               Title = a.Title,
+               CoverUrl = a.CoverUrl,
+               CreatedOn = a.CreatedOn
+           },
+           (a) => a.CreatedOn);
 
         public async Task<ArticleViewModel> GetById(string id)
         {
@@ -126,5 +150,12 @@ namespace Blog.Dal.Services.Articles
             this._dbContext.Articles.Update(article);
             this._dbContext.SaveChanges();
         }
+
+        private async Task<IEnumerable<T>> GetMappedArticles<T>(int count, Expression<Func<Article, T>> mapFunc, Expression<Func<Article, object>> orderByFunc)
+            => await this._dbContext.Articles
+                .OrderByDescending(orderByFunc)
+                .Take(count)
+                .Select(mapFunc)
+                .ToListAsync();
     }
 }
