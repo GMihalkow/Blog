@@ -128,6 +128,9 @@
                             var editBtn = $('<a class="custom-table-btn" href="' + '@this.Url.Action("Edit")/' + articleId + '"><i class="fas fa-edit"></i></a>');
                             container.append(editBtn);
 
+                            var copyBtn = $('<a class="custom-table-btn" confirm-modal-btn confirm-modal-message="Are you sure that you want to copy this article?" href="' + '@this.Url.Action("Copy")/' + articleId + '"><i class="fas fa-copy"></i>');
+                            container.append(copyBtn);
+
                             var deleteBtn = $('<a class="custom-table-btn" confirm-modal-btn confirm-modal-message="Are you sure that you want to delete this article?" href="' + '@this.Url.Action("Delete")/' + articleId + '"><i class="fas fa-trash-alt"></i>');
                             container.append(deleteBtn);
 

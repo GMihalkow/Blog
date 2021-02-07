@@ -114,6 +114,27 @@ namespace Blog.Dal.Services.Articles
             await this._dbContext.SaveChangesAsync();
         }
 
+        public async Task Copy(string id)
+        {
+            var article = await this._dbContext.Articles.FirstOrDefaultAsync((a) => a.Id == id);
+
+            if (article == null) return;
+
+            var newArticle = new Article
+            {
+                Title = article.Title + " - Copy",
+                Content = article.Content,
+                CreatedOn = article.CreatedOn,
+                ViewsCount = article.ViewsCount,
+                CoverUrl = article.CoverUrl,
+                CreatorId = article.CreatorId,
+                CategoryId = article.CategoryId,
+            };
+
+            await this._dbContext.Articles.AddAsync(newArticle);
+            await this._dbContext.SaveChangesAsync();
+        }
+
         public async Task Edit(ArticleEditModel model)
         {
             var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == model.Id);

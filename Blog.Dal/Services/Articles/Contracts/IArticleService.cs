@@ -10,7 +10,6 @@ namespace Blog.Dal.Services.Articles.Contracts
     {
         Task<IEnumerable<ArticleIndexModel>> GetPopularArticles(int count);
 
-
         Task<IEnumerable<ArticleIndexModel>> GetLatestArticles(int count);
 
         Task<ArticleViewModel> GetById(string id);
@@ -18,6 +17,8 @@ namespace Blog.Dal.Services.Articles.Contracts
         Task<ISearchResponseModel<ArticleSearchViewModel>> GetAll(IArticleSearchModel searchModel);
 
         Task Create(ArticleInputModel model);
+
+        Task Copy(string id);
 
         Task Edit(ArticleEditModel model);
 
