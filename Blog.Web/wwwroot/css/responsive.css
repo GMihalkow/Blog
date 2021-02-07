@@ -1,4 +1,26 @@
-﻿
+﻿@media only screen and (max-width: 820px) {
+    .main-body {
+        display: block;
+        width: 100%;
+    }
+
+    .latest-index-articles-wrapper {
+        margin: 0 auto;
+    }
+
+    .popular-index-articles-wrapper {
+        width: 90%;
+    }
+
+    .latest-index-articles-wrapper {
+        width: 90%;
+    }
+
+    .popular-index-article-title {
+        width: 10rem;
+    }
+}
+
 @media only screen and (max-width: 775px) {
     .article-wrapper .article-title {
         font-size: 26px;
@@ -6,6 +28,12 @@
 
     .article-cover-img-wrapper {
         height: 20rem;
+    }
+
+    .footer-wrapper {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
     }
 }
 

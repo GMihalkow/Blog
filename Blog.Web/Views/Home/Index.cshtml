@@ -2,16 +2,31 @@
 
 <div class="main-body">
     <section class="popular-index-articles-wrapper">
-        <header class="index-articles-header">Popular Articles</header>
+        <header class="index-articles-header"><h2>Popular Articles</h2></header>
         @foreach (var popularArticle in Model.PopularArticles)
         {
-            <section class="popular-index-article" article-id="@popularArticle.Id">
+            <section class="index-article" article-id="@popularArticle.Id">
                 <div class="popular-index-article-image-wrapper">
                     <img src="@(popularArticle.CoverUrl)" class="popular-index-article-image" />
                 </div>
-                <div class="popular-index-article-info">
-                    <h2 class="index-article-title">@popularArticle.Title.TrimText(WebConstants.IndexArticleTitleLength)</h2>
+                <div class="index-article-info">
+                    <h2 class="popular-index-article-title">@popularArticle.Title.TrimText(WebConstants.PopularIndexArticleTitleLength)</h2>
                     <div class="index-article-date">@popularArticle.CreatedOn.ToWebDateFormat()</div>
+                </div>
+            </section>
+        }
+    </section>
+    <section class="latest-index-articles-wrapper">
+        <header class="index-articles-header"><h2>Latest Articles</h2></header>
+        @foreach (var latestArticle in Model.LatestArticles)
+        {
+            <section class="index-article" article-id="@latestArticle.Id">
+                <div class="latest-index-article-image-wrapper">
+                    <img src="@(latestArticle.CoverUrl)" class="latest-index-article-image" />
+                </div>
+                <div class="index-article-info">
+                    <h2 class="latest-index-article-title">@latestArticle.Title.TrimText(WebConstants.LatestIndexArticleTitleLength)</h2>
+                    <div class="index-article-date">@latestArticle.CreatedOn.ToWebDateFormat()</div>
                 </div>
             </section>
         }
@@ -20,7 +35,7 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $('.popular-index-article').on('click', function (e) {
+        $('.index-article').on('click', function (e) {
             var $el = $(e.currentTarget);
             
             window.location.href = '@Url.Action("Details", "Article")/' + $el.attr('article-id');
