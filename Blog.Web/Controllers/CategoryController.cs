@@ -86,6 +86,28 @@ namespace Blog.Web.Controllers
             return this.RedirectToAction(nameof(Search));
         }
 
+        public async Task<IActionResult> Copy(string id)
+        {
+            var category = await this._categoryService.GetById(id);
+
+            if (category == null)
+            {
+                this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Error, string.Format(DalConstants.NotFoundMessage, "Category")));
+
+                return this.RedirectToAction(nameof(Search));
+            }
+            else if (category.CreatorId != await this.GetLoggedUserId())
+            {
+                return this.BadRequest();
+            }
+
+            await this._categoryService.Copy(id);
+            
+            this.TempData.AddSerialized(WebConstants.AlertKey, new Alert(AlertType.Success, string.Format(DalConstants.SuccessMessage, "copied", "category")));
+
+            return this.RedirectToAction(nameof(Search));
+        }
+
         public async Task<IActionResult> Delete(string id)
         {
             var category = await this._categoryService.GetById(id);

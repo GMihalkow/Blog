@@ -82,12 +82,28 @@ namespace Blog.Dal.Services.Categories
         {
             var category = await this._dbContext.Categories.FirstOrDefaultAsync(c => c.Id == model.Id);
 
-            if (category == null)
-                throw new InvalidOperationException("Category not found.");
+            if (category == null) return;
 
             category.Name = model.Name;
 
             this._dbContext.Update(category);
+            await this._dbContext.SaveChangesAsync();
+        }
+
+        public async Task Copy(string id)
+        {
+            var category = await this._dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null) return;
+
+            var newCategory = new Category
+            {
+                Name = category.Name + " - Copy",
+                CreatorId = category.CreatorId,
+                CreatedOn = category.CreatedOn
+            };
+
+            await this._dbContext.AddAsync(newCategory);
             await this._dbContext.SaveChangesAsync();
         }
 

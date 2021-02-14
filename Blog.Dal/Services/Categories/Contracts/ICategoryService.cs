@@ -18,6 +18,8 @@ namespace Blog.Dal.Services.Categories.Contracts
 
         Task Create(CategoryInputModel model);
 
+        Task Copy(string id);
+
         Task Edit(CategoryEditModel model);
 
         Task Delete(string id);

@@ -76,28 +76,19 @@
                         responsive: 0,
                         minWidth: 100,
                         formatter: function (cell) {
-                            var div = document.createElement('div');
-                            div.classList.add('custom-table-actions-col');
+                            var categoryId = cell.getData().id;
+                            var container = $('<div class="custom-table-actions-col"></div>');
 
-                            var editBtn = document.createElement('a');
-                            editBtn.textContent = 'Edit';
-                            editBtn.classList.add('custom-table-btn');
-                            editBtn.href = '@this.Url.Action("Edit")/' + cell.getData().id;
+                            var editBtn = $('<a class="custom-table-btn" href="' + '@this.Url.Action("Edit")/' + categoryId + '"><i class="fas fa-edit"></i></a>');
+                            container.append(editBtn);
 
-                            div.appendChild(editBtn);
+                            var copyBtn = $('<a class="custom-table-btn" confirm-modal-btn confirm-modal-message="Are you sure that you want to copy this category?" href="' + '@this.Url.Action("Copy")/' + categoryId + '"><i class="fas fa-copy"></i>');
+                            container.append(copyBtn);
 
-                            var deleteBtn = document.createElement('a');
-                            deleteBtn.textContent = 'Delete';
+                            var deleteBtn = $('<a class="custom-table-btn" confirm-modal-btn confirm-modal-message="Are you sure that you want to delete this category?" href="' + '@this.Url.Action("Delete")/' + categoryId + '"><i class="fas fa-trash-alt"></i>');
+                            container.append(deleteBtn);
 
-                            deleteBtn.setAttribute('confirm-modal-btn', '');
-                            deleteBtn.setAttribute('confirm-modal-message', 'Are you sure that you want to delete this category?');
-
-                            deleteBtn.classList.add('custom-table-btn');
-                            deleteBtn.href = '@this.Url.Action("Delete")/' + cell.getData().id;
-
-                            div.appendChild(deleteBtn);
-
-                            return div;
+                            return container[0];
                         }
                     }
                 ]
