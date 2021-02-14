@@ -18,9 +18,9 @@ namespace Blog.Dal.Services.Articles.Contracts
 
         Task Create(ArticleInputModel model);
 
-        Task Copy(string id);
-
         Task Edit(ArticleEditModel model);
+
+        Task Copy(string id);
 
         Task Delete(string id);
 

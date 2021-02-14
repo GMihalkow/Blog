@@ -114,6 +114,23 @@ namespace Blog.Dal.Services.Articles
             await this._dbContext.SaveChangesAsync();
         }
 
+        public async Task Edit(ArticleEditModel model)
+        {
+            var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == model.Id);
+            if (article == null) return;
+
+            var sanitizer = new HtmlSanitizer(DalConstants.AllowedHtmlTags);
+            var decodedContent = HttpUtility.HtmlDecode(model.Content);
+
+            article.Title = model.Title;
+            article.CategoryId = model.CategoryId;
+            article.Content = sanitizer.Sanitize(decodedContent);
+            article.CoverUrl = model.CoverUrl;
+
+            this._dbContext.Update(article);
+            await this._dbContext.SaveChangesAsync();
+        }
+
         public async Task Copy(string id)
         {
             var article = await this._dbContext.Articles.FirstOrDefaultAsync((a) => a.Id == id);
@@ -132,23 +149,6 @@ namespace Blog.Dal.Services.Articles
             };
 
             await this._dbContext.Articles.AddAsync(newArticle);
-            await this._dbContext.SaveChangesAsync();
-        }
-
-        public async Task Edit(ArticleEditModel model)
-        {
-            var article = await this._dbContext.Articles.FirstOrDefaultAsync(a => a.Id == model.Id);
-            if (article == null) return;
-
-            var sanitizer = new HtmlSanitizer(DalConstants.AllowedHtmlTags);
-            var decodedContent = HttpUtility.HtmlDecode(model.Content);
-
-            article.Title = model.Title;
-            article.CategoryId = model.CategoryId;
-            article.Content = sanitizer.Sanitize(decodedContent);
-            article.CoverUrl = model.CoverUrl;
-
-            this._dbContext.Update(article);
             await this._dbContext.SaveChangesAsync();
         }
 
