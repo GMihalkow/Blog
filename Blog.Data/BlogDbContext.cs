@@ -11,6 +11,8 @@ namespace Blog.Data
         {
         }
 
+        public DbSet<FaqQuestion> Faqs { get; set; }
+
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Category> Categories { get; set; }
@@ -22,6 +24,7 @@ namespace Blog.Data
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new ArticleConfiguration());
+            builder.ApplyConfiguration(new FaqQuestionConfiguration());
         }
     }
 }

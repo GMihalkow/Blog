@@ -8,5 +8,7 @@ namespace Blog.Models
         public ICollection<Category> Categories { get; set; }
 
         public ICollection<Article> Articles { get; set; }
+
+        public ICollection<FaqQuestion> Faqs { get; set; }
     }
 }
