@@ -33,6 +33,8 @@ namespace Blog.Web.Controllers
             var article = await this._articleService.GetById(id);
             if (article == null) return this.NotFound();
 
+            article.ViewsCount++;
+
             return this.View(article);
         }
 
